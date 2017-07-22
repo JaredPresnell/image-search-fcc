@@ -15,16 +15,18 @@ app.get("/", function (request, response) {
 });
 
 app.get("/query/*", function(req, res){
+  //need params for offset and query
   var temp = req.params[0];
   var returnVal=null;
   Bing.images(temp, {
-    count: 1,  // Number of results (max 50) 
+    count: 2,  // Number of results (max 50) 
     offset: 0   // Skip first 3 results 
   }, function(error, resp, body){
-     //var urls = body.map(x => x.contentURL);
-    //returnVal =body.contentUrl.value;
-    
-    res.json(body);
+     //url = body.value[0].contentUrl
+    var returnVal = body.value.map(x => x.contentUrl);
+    //res.send(JSON.stringify(body.value[0].contentUrl));
+    res.send(JSON.stringify(returnVal));
+
   });
  //res.send('return val is '+returnVal);
 });
