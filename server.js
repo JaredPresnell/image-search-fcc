@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var Bing =require('node-bing-api')({accKey: process.env.BING1});
-app.use(express.static('public'));
+app.use("/public", express.static('public'));
 
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
