@@ -15,8 +15,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/query/*", function(req, res){
-  var returnVal=null;
-  Bing.web("Pizza", {
+  var returnVal= Bing.web("Pizza", {
     count: 10,  // Number of results (max 50) 
     offset: 3   // Skip first 3 results 
   }, function(error, res, body){
@@ -27,9 +26,12 @@ app.get("/query/*", function(req, res){
     // printing the first two web page results 
     console.log(body.webPages.value[0]);
     console.log(body.webPages.value[1]);
-    returnVal=body.webPages.value[]
+    returnVal=body.webPages.value[0];
+    res.send(body);
+    returnVal=body;
+    return(body);
   });
-  res.send(body.webPages.value[0]);
+ res.send('return val is '+returnVal);
 });
 
 // listen for requests :)
