@@ -14,7 +14,23 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-
+app.get("/query/*", function(req, res){
+  var returnVal=null;
+  Bing.web("Pizza", {
+    count: 10,  // Number of results (max 50) 
+    offset: 3   // Skip first 3 results 
+  }, function(error, res, body){
+ 
+    // body has more useful information besides web pages 
+    // (image search, related search, news, videos) 
+    // but for this example we are just 
+    // printing the first two web page results 
+    console.log(body.webPages.value[0]);
+    console.log(body.webPages.value[1]);
+    returnVal=body.webPages.value[]
+  });
+  res.send(body.webPages.value[0]);
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {

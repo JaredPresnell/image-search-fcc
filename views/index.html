@@ -13,6 +13,8 @@
     <title>Welcome to Glitch!</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,9 +24,9 @@
     <h1>
       Image Search using Bing API
     </h1>
-    <a placeholder="Enter search terms" ng-href="/query/{{query}}"></a>
-    //make a button
-    //input stuff
+    <a class="btn btn-primary"  ng-href="/query/{{query}}">Go!</a> 
+<!-- ng-href needs to point to the url fo the bing API      -->
+    <input placeholder="Enter search terms" ng-model="query">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>  </body>
   <script src="public/app.js"></script>
 </html>
