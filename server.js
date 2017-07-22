@@ -1,10 +1,13 @@
-// server.js
-// where your node app starts
+//the database part comes into play by saving queries to the database, so that previous queries can be displayed
+// everything else should be non database stuff
 
-// init project
+
 var express = require('express');
 var app = express();
-
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var cors = require('cors');
+var Bing =require('node-bing-api')({accKey: process.env.BING1});
 app.use(express.static('public'));
 
 app.get("/", function (request, response) {
