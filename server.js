@@ -15,23 +15,15 @@ app.get("/", function (request, response) {
 });
 
 app.get("/query/*", function(req, res){
-  var returnVal= Bing.web("Pizza", {
+  var temp = req.params[0];
+  Bing.images(temp, {
     count: 10,  // Number of results (max 50) 
     offset: 3   // Skip first 3 results 
-  }, function(error, res, body){
+  }, function(error, resp, body){
  
-    // body has more useful information besides web pages 
-    // (image search, related search, news, videos) 
-    // but for this example we are just 
-    // printing the first two web page results 
-    console.log(body.webPages.value[0]);
-    console.log(body.webPages.value[1]);
-    returnVal=body.webPages.value[0];
-    res.send(body);
-    returnVal=body;
-    return(body);
+    res.json(body);
   });
- res.send('return val is '+returnVal);
+ //res.send('return val is '+returnVal);
 });
 
 // listen for requests :)
