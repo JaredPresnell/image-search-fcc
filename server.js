@@ -16,11 +16,14 @@ app.get("/", function (request, response) {
 
 app.get("/query/*", function(req, res){
   var temp = req.params[0];
+  var returnVal=null;
   Bing.images(temp, {
-    count: 10,  // Number of results (max 50) 
-    offset: 3   // Skip first 3 results 
+    count: 1,  // Number of results (max 50) 
+    offset: 0   // Skip first 3 results 
   }, function(error, resp, body){
- 
+     //var urls = body.map(x => x.contentURL);
+    //returnVal =body.contentUrl.value;
+    
     res.json(body);
   });
  //res.send('return val is '+returnVal);
