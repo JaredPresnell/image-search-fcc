@@ -22,11 +22,10 @@ app.get("/query/*", function(req, res){
     count: 2,  // Number of results (max 50) 
     offset: 0   // Skip first 3 results 
   }, function(error, resp, body){
-     //url = body.value[0].contentUrl
-    var returnVal = body.value.map(x => x.contentUrl);
-    //res.send(JSON.stringify(body.value[0].contentUrl));
+    //var returnVal = body.value.map(function(x){return {imageUrl: x.contentUrl, hostPageUrl: x.hostPageUrl};});
+    var returnVal = body;
     res.send(JSON.stringify(returnVal));
-
+    
   });
  //res.send('return val is '+returnVal);
 });
