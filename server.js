@@ -22,7 +22,7 @@ app.get("/query/*", function(req, res){
     count: 2,  // Number of results (max 50) 
     offset: 0   // Skip first 3 results 
   }, function(error, resp, body){
-    var returnVal = body.value.map(function(x){return {imageUrl: x.contentUrl, hostPageUrl: x.hostPageUrl, name: x.name};});
+    var returnVal =body.value.map(function(x){return {imageUrl: x.contentUrl, hostPageUrl: x.hostPageUrl, name: x.name};});
     // var returnVal = body.value[0].image.name;
     res.send(JSON.stringify(returnVal));
     
