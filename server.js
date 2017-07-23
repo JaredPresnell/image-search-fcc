@@ -19,7 +19,6 @@ app.get("/search/:query*", function(req, res){
   var query = req.params.query;
   var offset = req.query.offset;
   var returnVal=null;
-  if(offset===null) offset=0;
   Bing.images(query, {
     count: 10,  // Number of results (max 50) 
     offset: offset   // Skip first 3 results 
@@ -28,7 +27,7 @@ app.get("/search/:query*", function(req, res){
     res.send(JSON.stringify(returnVal));
     
   });
- // res.send("query: "+query+" offset: "+offset);
+  // res.send("query: "+query+" offset: "+offset);
 });
 
 // listen for requests :)
