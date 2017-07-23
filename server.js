@@ -14,19 +14,21 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/search/:query/*", function(req, res){
+app.get("/search/:query*", function(req, res){
   //need params for offset and query
-  var temp = req.params.query;
+  var query = req.params.query;
+  var offset = req.query.offset;
   var returnVal=null;
-//   Bing.images(temp, {
-//     count: 3,  // Number of results (max 50) 
-//     offset: 2   // Skip first 3 results 
-//   }, function(error, resp, body){
-//     var returnVal =body.value.map(function(x){return {imageUrl: x.contentUrl, hostPageUrl: x.hostPageUrl, text: x.name};});
-//     res.send(JSON.stringify(returnVal));
+  if(offset===null) offset=0;
+  Bing.images(query, {
+    count: 10,  // Number of results (max 50) 
+    offset: offset   // Skip first 3 results 
+  }, function(error, resp, body){
+    var returnVal =body.value.map(function(x){return {imageUrl: x.contentUrl, hostPageUrl: x.hostPageUrl, alt_text: x.name};});
+    res.send(JSON.stringify(returnVal));
     
-//   });
- res.send(req.query);
+  });
+ // res.send("query: "+query+" offset: "+offset);
 });
 
 // listen for requests :)
