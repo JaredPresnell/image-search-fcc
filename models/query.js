@@ -1,4 +1,3 @@
-//this is the template/structure for shortUrl datastructure
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
