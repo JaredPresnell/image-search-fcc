@@ -11,6 +11,8 @@ var Bing =require('node-bing-api')({accKey: process.env.BING1});
 var queryModel = require('./models/query.js');
 app.use("/public", express.static('public'));
 
+mongoose.connect(process.env.MONGODB_URI);
+
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
@@ -40,7 +42,19 @@ app.get("/search/:query*", function(req, res){
 });
 
 app.get("/history", function(req, res){
-  res.send(JSON.stringify(queryModel.find()));
+  var history = queryModel.find({}, function(err, data)
+                                  {
+    if(err) console.log("error");
+    else 
+    {
+      var returnData= data.map(function(x){
+        return {searchQuery: x.searchQuery, time: x.updatedAt}
+      })
+      res.send(returnData);
+    }
+  });
+  //res.send(history);
+  // res.send('hey there');
 });
 
 // listen for requests :)
