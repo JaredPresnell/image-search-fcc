@@ -17,6 +17,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+       
 app.get("/search/:query*", function(req, res){
   //need params for offset and query
   var query = req.params.query;
@@ -39,6 +40,11 @@ app.get("/search/:query*", function(req, res){
     
   });
   // res.send("query: "+query+" offset: "+offset);
+});
+
+app.get("/search/:query", function(req, res){
+  var redirectString = "/search/"+req.params.query+"/?offset=0";
+  res.redirect(redirectString);
 });
 
 app.get("/history", function(req, res){

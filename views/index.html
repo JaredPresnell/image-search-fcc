@@ -10,11 +10,10 @@
 <!DOCTYPE html>
 <html ng-app="queryApp">
   <head>
-    <title>Welcome to Glitch!</title>
-    <meta name="description" content="A cool thing made with Glitch">
+    <title>Image Search API</title>
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <link rel = "stylesheet" href ="public/style.css">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,8 +22,21 @@
     <h1>
       Image Search using Bing API
     </h1>
-    <a class="btn btn-primary"  ng-href="/search/{{query}}/?offset=0">Go!</a> 
     <input placeholder="Enter search terms" ng-model="query">
+    <a class="btn btn-primary"  ng-href="/search/{{query}}/?offset=0">Go!</a> 
+    <br>
+    <h2>
+      Usage
+    </h2>
+    <p>
+      Enter a search query into the search box, and then click "Go!"
+    </p>
+    <p>
+      Alternatively, search queries may be entered directly into the url bar at https://image-search-fcc-presnell.glitch.me/search/*YOUR SEARCH HERE*/?offset=0
+    </p>
+    <p>
+      You may skip X number of results by setting ?offset=X
+    </p>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>  </body>
   <script src="public/app.js"></script>
 </html>
