@@ -22,6 +22,8 @@ app.get("/search/:query*", function(req, res){
   //need params for offset and query
   var query = req.params.query;
   var offset = req.query.offset;
+  if(offset===null ||offset===undefined)
+    offset=0;
   var returnVal=null;
   Bing.images(query, {
     count: 10,  // Number of results (max 50) 
@@ -42,10 +44,10 @@ app.get("/search/:query*", function(req, res){
   // res.send("query: "+query+" offset: "+offset);
 });
 
-app.get("/search/:query", function(req, res){
-  var redirectString = "/search/"+req.params.query+"/?offset=0";
-  res.redirect(redirectString);
-});
+// app.get("/search/:query", function(req, res){
+//   var redirectString = "/search/"+req.params.query+"/?offset=0";
+//   res.redirect(redirectString);
+// });
 
 app.get("/history", function(req, res){
   var history = queryModel.find({}, function(err, data)
@@ -56,6 +58,7 @@ app.get("/history", function(req, res){
       var returnData= data.map(function(x){
         return {searchQuery: x.searchQuery, time: x.updatedAt}
       })
+      returnData = returnData.reverse(); //sets most recent to the beginning of the array, rather than the end 
       res.send(returnData);
     }
   });
