@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var Bing =require('node-bing-api')({accKey: process.env.BING1});
-var querySchema = 
+var queryModel = require('./models/query.js');
 app.use("/public", express.static('public'));
 
 app.get("/", function (request, response) {
@@ -25,10 +25,22 @@ app.get("/search/:query*", function(req, res){
     offset: offset   // Skip first 3 results 
   }, function(error, resp, body){
     var returnVal =body.value.map(function(x){return {imageUrl: x.contentUrl, hostPageUrl: x.hostPageUrl, alt_text: x.name};});
+    var data = new queryModel({
+      searchQuery: query
+    });
+    data.save(err=>{
+      if(err){
+        return res.send('Error saving to database');
+      }
+    });
     res.send(JSON.stringify(returnVal));
     
   });
   // res.send("query: "+query+" offset: "+offset);
+});
+
+app.get("/history", function(req, res){
+  res.send(JSON.stringify(queryModel.find()));
 });
 
 // listen for requests :)
